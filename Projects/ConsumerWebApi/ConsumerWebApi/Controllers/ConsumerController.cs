@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using ConsumerWebApi.Models;
+using Daishi.AMQP;
+using RabbitMQ.Client.Events;
 
 namespace ConsumerWebApi.Controllers
 {
@@ -43,5 +45,29 @@ namespace ConsumerWebApi.Controllers
                 }
             }
         }
+
+        [HttpGet]
+        [Route("testMicroservice")]
+        public IHttpActionResult TestCallToMicroservice()
+        {
+            var rabbitMqAdapterInstance = RabbitMQAdapter.Instance;
+            rabbitMqAdapterInstance.Init("localhost", 5672, "guest", "guest", 50);
+            rabbitMqAdapterInstance.Connect();
+
+            string edges = "100/250/300";
+            rabbitMqAdapterInstance.Publish(edges, "TrianglePerimeter");
+
+            string response;
+            BasicDeliverEventArgs args;
+            var responded = rabbitMqAdapterInstance
+                .TryGetNextMessage("TrianglePerimeterResult", 
+                out response, out args, 5000);
+
+            if (responded)
+                return Ok(response);
+            else
+                return InternalServerError();
+        }
+
     }
 }
