@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Daishi.AMQP;
@@ -27,11 +28,20 @@ namespace TrianglePerimeterMicroservice.Microservice
         {
             string[] edges = e.Message.Split('/');
             Console.WriteLine("Received: " + e.Message);
-            var result = Convert.ToInt32(edges[0]) + 
-                Convert.ToInt32(edges[1]) + Convert.ToInt32(edges[2]);
+            try
+            {
+                var result = Convert.ToInt32(edges[0]) +
+                             Convert.ToInt32(edges[1]) + Convert.ToInt32(edges[2]);
+                var requestResult = result.ToString() + "@" + e.Message;
 
-            _adapter.Publish(result.ToString(), "TrianglePerimeterResult");
-            Console.WriteLine("Published: " + result);
+                _adapter.Publish(requestResult, "TrianglePerimeterResult");
+                Console.WriteLine("Published: " + requestResult);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Eroare: " + ex.Message);
+            }
+            
         }
 
         public void Shutdown()

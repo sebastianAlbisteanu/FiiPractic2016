@@ -54,19 +54,34 @@ namespace ConsumerWebApi.Controllers
             rabbitMqAdapterInstance.Init("localhost", 5672, "guest", "guest", 50);
             rabbitMqAdapterInstance.Connect();
 
-            string edges = "100/250/300";
+            var rand = new Random();
+            int e1 = rand.Next(1000);
+            int e2 = rand.Next(1000);
+            int e3 = rand.Next(1000);
+
+            string edges = e1 + "/" + e2 + "/" + e3;
             rabbitMqAdapterInstance.Publish(edges, "TrianglePerimeter");
 
             string response;
             BasicDeliverEventArgs args;
-            var responded = rabbitMqAdapterInstance
-                .TryGetNextMessage("TrianglePerimeterResult", 
-                out response, out args, 5000);
-
-            if (responded)
-                return Ok(response);
-            else
-                return InternalServerError();
+            bool ok = false;
+            bool responded;
+            while (!ok)
+            {
+                responded = rabbitMqAdapterInstance
+                    .TryGetNextMessage("TrianglePerimeterResult",
+                        out response, out args, 5000);
+                var responseSplit = response.Split('@');
+                if (responseSplit.Length > 1 && responseSplit[1].Equals(edges))
+                {
+                    return Ok(response);
+                }
+                else
+                {
+                    rabbitMqAdapterInstance.Publish(response, "TrianglePerimeterResult");
+                }
+            }
+            return InternalServerError();
         }
 
     }

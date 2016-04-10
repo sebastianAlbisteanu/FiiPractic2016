@@ -10,8 +10,15 @@ namespace TrianglePerimeterMicroservice
     {
         static void Main(string[] args)
         {
-            var microservice = new Microservice.TrianglePerimeterMicroservice();
-            microservice.Init();
+            int n = 5;
+            var microservices = new List<Microservice.TrianglePerimeterMicroservice>();
+            for (int i = 0; i < n; i++)
+            {
+                var microservice = new Microservice.TrianglePerimeterMicroservice();
+                microservice.Init();
+                microservices.Add(microservice);
+            }
+
             Console.ReadLine();
         }
     }
