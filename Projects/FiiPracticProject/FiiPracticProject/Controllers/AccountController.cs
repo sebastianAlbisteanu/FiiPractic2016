@@ -14,21 +14,16 @@ namespace FiiPracticProject.Controllers
     {
         [HttpPost]
         [Route("addAccount")]
-        public IHttpActionResult AddAccount(string name, string password, string location, int temperature, int hour, int min)
+        public IHttpActionResult AddAccount(AccountModel account)
         {
             try
             {
-                var allAccounts = DataStoreUtil.ReadModels();
+                if (account == null)
+                    return BadRequest();
 
-                allAccounts.Add(new AccountModel
-                {
-                    Name = name,
-                    Location = location,
-                    Password = password,
-                    Temperature = temperature,
-                    SleepHour = hour,
-                    SleepMinute = min
-                });
+                var allAccounts = DataStoreUtil.ReadModels() ?? new List<AccountModel>();
+
+                allAccounts.Add(account);
 
                 DataStoreUtil.SaveModels(allAccounts);
 
@@ -75,7 +70,7 @@ namespace FiiPracticProject.Controllers
             {
                 var allAccounts = DataStoreUtil.ReadModels();
 
-                var currentAccount = allAccounts.FirstOrDefault(a => a.Sensors.Contains(sensorId));
+                var currentAccount = allAccounts.FirstOrDefault(a => a.Sensors != null && a.Sensors.Contains(sensorId));
 
                 if (currentAccount == null)
                     return NotFound();
