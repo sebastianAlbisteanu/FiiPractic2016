@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountService", "FiiPracticProject\AccountService.csproj", "{2B370314-2104-48E7-A818-7C2F89E7216C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorManagement", "SensorManagement\SensorManagement.csproj", "{C8DDB408-F730-4041-A0A1-7A9CAAABBBC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandManagement", "CommandManagement\CommandManagement.csproj", "{095CABB6-1A0F-4157-B258-9BD163C9F383}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B370314-2104-48E7-A818-7C2F89E7216C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B370314-2104-48E7-A818-7C2F89E7216C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B370314-2104-48E7-A818-7C2F89E7216C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B370314-2104-48E7-A818-7C2F89E7216C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8DDB408-F730-4041-A0A1-7A9CAAABBBC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8DDB408-F730-4041-A0A1-7A9CAAABBBC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8DDB408-F730-4041-A0A1-7A9CAAABBBC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8DDB408-F730-4041-A0A1-7A9CAAABBBC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{095CABB6-1A0F-4157-B258-9BD163C9F383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{095CABB6-1A0F-4157-B258-9BD163C9F383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{095CABB6-1A0F-4157-B258-9BD163C9F383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{095CABB6-1A0F-4157-B258-9BD163C9F383}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
