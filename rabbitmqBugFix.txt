@@ -1,0 +1,9 @@
+Command Prompt -> folder instalare RabbitMQ/sbin. Executati:
+
+rabbitmqctl set_permissions -p / guest ".*" ".*" ".*"   
+
+*comanda precedenta seteaza toate drepturile pentru utilizatorul "guest" ( default )
+
+Daca nu exista utilizatorul "guest" executati inainte: rabbitmqctl add_user guest guest
+
+Asistenta : Albisteanu Sebastian Facebook
